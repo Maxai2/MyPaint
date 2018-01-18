@@ -1,6 +1,6 @@
 ﻿namespace MyPaint
 {
-    partial class Form1
+    partial class fMyPaint
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMyPaint));
             this.Ribbon = new System.Windows.Forms.Ribbon();
+            this.rOMINew = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.rOMIOpen = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.rOMISave = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.rOMISaveAs = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
+            this.rOMIAbout = new System.Windows.Forms.RibbonOrbMenuItem();
             this.rTHome = new System.Windows.Forms.RibbonTab();
-            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
-            this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
-            this.ribbonButton3 = new System.Windows.Forms.RibbonButton();
+            this.rPTools = new System.Windows.Forms.RibbonPanel();
+            this.rBPen = new System.Windows.Forms.RibbonButton();
+            this.rBFill = new System.Windows.Forms.RibbonButton();
+            this.rBText = new System.Windows.Forms.RibbonButton();
+            this.rBEraser = new System.Windows.Forms.RibbonButton();
+            this.rBEyeDropper = new System.Windows.Forms.RibbonButton();
+            this.rPToolsHelp = new System.Windows.Forms.RibbonPanel();
+            this.rBShapes = new System.Windows.Forms.RibbonButton();
+            this.rBBrushes = new System.Windows.Forms.RibbonButton();
+            this.rBColor = new System.Windows.Forms.RibbonButton();
+            this.rPZoom = new System.Windows.Forms.RibbonPanel();
+            this.rBPlus = new System.Windows.Forms.RibbonButton();
+            this.rBMinus = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // Ribbon
@@ -49,63 +63,158 @@
             // 
             this.Ribbon.OrbDropDown.BorderRoundness = 8;
             this.Ribbon.OrbDropDown.Location = new System.Drawing.Point(0, 0);
+            this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMINew);
+            this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMIOpen);
+            this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMISave);
+            this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMISaveAs);
+            this.Ribbon.OrbDropDown.MenuItems.Add(this.ribbonSeparator1);
+            this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMIAbout);
             this.Ribbon.OrbDropDown.Name = "";
-            this.Ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 72);
+            this.Ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 295);
             this.Ribbon.OrbDropDown.TabIndex = 0;
             this.Ribbon.OrbImage = null;
             this.Ribbon.OrbStyle = System.Windows.Forms.RibbonOrbStyle.Office_2010;
-            // 
-            // 
-            // 
-            this.Ribbon.QuickAcessToolbar.Items.Add(this.ribbonButton3);
             this.Ribbon.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
-            this.Ribbon.Size = new System.Drawing.Size(983, 168);
+            this.Ribbon.Size = new System.Drawing.Size(967, 128);
             this.Ribbon.TabIndex = 0;
             this.Ribbon.Tabs.Add(this.rTHome);
             this.Ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
+            this.Ribbon.Text = "Ribbon";
             this.Ribbon.ThemeColor = System.Windows.Forms.RibbonTheme.Blue;
+            // 
+            // rOMINew
+            // 
+            this.rOMINew.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.rOMINew.Image = ((System.Drawing.Image)(resources.GetObject("rOMINew.Image")));
+            this.rOMINew.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMINew.SmallImage")));
+            this.rOMINew.Text = "New";
+            this.rOMINew.Click += new System.EventHandler(this.rOMINew_Click);
+            // 
+            // rOMIOpen
+            // 
+            this.rOMIOpen.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.rOMIOpen.Image = ((System.Drawing.Image)(resources.GetObject("rOMIOpen.Image")));
+            this.rOMIOpen.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMIOpen.SmallImage")));
+            this.rOMIOpen.Text = "Open";
+            // 
+            // rOMISave
+            // 
+            this.rOMISave.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.rOMISave.Image = ((System.Drawing.Image)(resources.GetObject("rOMISave.Image")));
+            this.rOMISave.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMISave.SmallImage")));
+            this.rOMISave.Text = "Save";
+            // 
+            // rOMISaveAs
+            // 
+            this.rOMISaveAs.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.rOMISaveAs.Image = ((System.Drawing.Image)(resources.GetObject("rOMISaveAs.Image")));
+            this.rOMISaveAs.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMISaveAs.SmallImage")));
+            this.rOMISaveAs.Text = "Save as";
+            // 
+            // rOMIAbout
+            // 
+            this.rOMIAbout.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.rOMIAbout.Image = ((System.Drawing.Image)(resources.GetObject("rOMIAbout.Image")));
+            this.rOMIAbout.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMIAbout.SmallImage")));
+            this.rOMIAbout.Text = "About";
             // 
             // rTHome
             // 
-            this.rTHome.Panels.Add(this.ribbonPanel1);
-            this.rTHome.Panels.Add(this.ribbonPanel2);
+            this.rTHome.Panels.Add(this.rPTools);
+            this.rTHome.Panels.Add(this.rPToolsHelp);
+            this.rTHome.Panels.Add(this.rPZoom);
             this.rTHome.Text = "Home";
             // 
-            // ribbonPanel1
+            // rPTools
             // 
-            this.ribbonPanel1.Items.Add(this.ribbonButton1);
-            this.ribbonPanel1.Text = "ribbonPanel1";
+            this.rPTools.Items.Add(this.rBPen);
+            this.rPTools.Items.Add(this.rBFill);
+            this.rPTools.Items.Add(this.rBText);
+            this.rPTools.Items.Add(this.rBEraser);
+            this.rPTools.Items.Add(this.rBEyeDropper);
+            this.rPTools.Text = "Tools";
             // 
-            // ribbonButton1
+            // rBPen
             // 
-            this.ribbonButton1.DropDownItems.Add(this.ribbonButton2);
-            this.ribbonButton1.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.Image")));
-            this.ribbonButton1.Text = "Load";
+            this.rBPen.Image = ((System.Drawing.Image)(resources.GetObject("rBPen.Image")));
+            this.rBPen.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBPen.SmallImage")));
+            this.rBPen.Text = "";
+            this.rBPen.Click += new System.EventHandler(this.rBPen_Click);
             // 
-            // ribbonPanel2
+            // rBFill
             // 
-            this.ribbonPanel2.Text = "ribbonPanel2";
+            this.rBFill.Image = ((System.Drawing.Image)(resources.GetObject("rBFill.Image")));
+            this.rBFill.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBFill.SmallImage")));
+            this.rBFill.Text = "";
             // 
-            // ribbonButton2
+            // rBText
             // 
-            this.ribbonButton2.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.Image")));
-            this.ribbonButton2.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.SmallImage")));
-            this.ribbonButton2.Text = "ribbonButton2";
+            this.rBText.Image = ((System.Drawing.Image)(resources.GetObject("rBText.Image")));
+            this.rBText.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBText.SmallImage")));
+            this.rBText.Text = "";
             // 
-            // ribbonButton3
+            // rBEraser
             // 
-            this.ribbonButton3.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
-            this.ribbonButton3.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.SmallImage")));
-            this.ribbonButton3.Text = "ribbonButton3";
+            this.rBEraser.Image = ((System.Drawing.Image)(resources.GetObject("rBEraser.Image")));
+            this.rBEraser.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBEraser.SmallImage")));
+            this.rBEraser.Text = "";
             // 
-            // Form1
+            // rBEyeDropper
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 525);
+            this.rBEyeDropper.Image = ((System.Drawing.Image)(resources.GetObject("rBEyeDropper.Image")));
+            this.rBEyeDropper.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBEyeDropper.SmallImage")));
+            this.rBEyeDropper.Text = "";
+            // 
+            // rPToolsHelp
+            // 
+            this.rPToolsHelp.Items.Add(this.rBShapes);
+            this.rPToolsHelp.Items.Add(this.rBBrushes);
+            this.rPToolsHelp.Items.Add(this.rBColor);
+            this.rPToolsHelp.Text = "Tools help";
+            // 
+            // rBShapes
+            // 
+            this.rBShapes.Image = ((System.Drawing.Image)(resources.GetObject("rBShapes.Image")));
+            this.rBShapes.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBShapes.SmallImage")));
+            this.rBShapes.Text = "";
+            // 
+            // rBBrushes
+            // 
+            this.rBBrushes.Image = ((System.Drawing.Image)(resources.GetObject("rBBrushes.Image")));
+            this.rBBrushes.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBBrushes.SmallImage")));
+            this.rBBrushes.Text = "";
+            // 
+            // rBColor
+            // 
+            this.rBColor.Image = ((System.Drawing.Image)(resources.GetObject("rBColor.Image")));
+            this.rBColor.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBColor.SmallImage")));
+            this.rBColor.Text = "";
+            // 
+            // rPZoom
+            // 
+            this.rPZoom.Items.Add(this.rBPlus);
+            this.rPZoom.Items.Add(this.rBMinus);
+            this.rPZoom.Text = "Zoom";
+            // 
+            // rBPlus
+            // 
+            this.rBPlus.Image = ((System.Drawing.Image)(resources.GetObject("rBPlus.Image")));
+            this.rBPlus.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBPlus.SmallImage")));
+            this.rBPlus.Text = "";
+            // 
+            // rBMinus
+            // 
+            this.rBMinus.Image = ((System.Drawing.Image)(resources.GetObject("rBMinus.Image")));
+            this.rBMinus.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBMinus.SmallImage")));
+            this.rBMinus.Text = "";
+            // 
+            // fMyPaint
+            // 
+            this.ClientSize = new System.Drawing.Size(967, 613);
             this.Controls.Add(this.Ribbon);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.IsMdiContainer = true;
+            this.Name = "fMyPaint";
+            this.Text = "MyPaint";
             this.ResumeLayout(false);
 
         }
@@ -113,12 +222,26 @@
         #endregion
 
         private System.Windows.Forms.Ribbon Ribbon;
+        private System.Windows.Forms.RibbonOrbMenuItem rOMINew;
+        private System.Windows.Forms.RibbonOrbMenuItem rOMIOpen;
+        private System.Windows.Forms.RibbonOrbMenuItem rOMISave;
+        private System.Windows.Forms.RibbonOrbMenuItem rOMISaveAs;
+        private System.Windows.Forms.RibbonSeparator ribbonSeparator1;
+        private System.Windows.Forms.RibbonOrbMenuItem rOMIAbout;
         private System.Windows.Forms.RibbonTab rTHome;
-        private System.Windows.Forms.RibbonPanel ribbonPanel1;
-        private System.Windows.Forms.RibbonButton ribbonButton1;
-        private System.Windows.Forms.RibbonPanel ribbonPanel2;
-        private System.Windows.Forms.RibbonButton ribbonButton3;
-        private System.Windows.Forms.RibbonButton ribbonButton2;
+        private System.Windows.Forms.RibbonPanel rPTools;
+        private System.Windows.Forms.RibbonPanel rPToolsHelp;
+        private System.Windows.Forms.RibbonPanel rPZoom;
+        private System.Windows.Forms.RibbonButton rBPen;
+        private System.Windows.Forms.RibbonButton rBFill;
+        private System.Windows.Forms.RibbonButton rBText;
+        private System.Windows.Forms.RibbonButton rBEraser;
+        private System.Windows.Forms.RibbonButton rBEyeDropper;
+        private System.Windows.Forms.RibbonButton rBShapes;
+        private System.Windows.Forms.RibbonButton rBBrushes;
+        private System.Windows.Forms.RibbonButton rBColor;
+        private System.Windows.Forms.RibbonButton rBPlus;
+        private System.Windows.Forms.RibbonButton rBMinus;
     }
 }
 
