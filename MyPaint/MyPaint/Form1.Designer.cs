@@ -44,12 +44,15 @@
             this.rBEraser = new System.Windows.Forms.RibbonButton();
             this.rBEyeDropper = new System.Windows.Forms.RibbonButton();
             this.rPToolsHelp = new System.Windows.Forms.RibbonPanel();
-            this.rBShapes = new System.Windows.Forms.RibbonButton();
             this.rBBrushes = new System.Windows.Forms.RibbonButton();
             this.rBColor = new System.Windows.Forms.RibbonButton();
             this.rPZoom = new System.Windows.Forms.RibbonPanel();
             this.rBPlus = new System.Windows.Forms.RibbonButton();
             this.rBMinus = new System.Windows.Forms.RibbonButton();
+            this.rCBShapes = new System.Windows.Forms.RibbonComboBox();
+            this.rBLine = new System.Windows.Forms.RibbonButton();
+            this.rBCircle = new System.Windows.Forms.RibbonButton();
+            this.rBRectangle = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // Ribbon
@@ -73,9 +76,8 @@
             this.Ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 295);
             this.Ribbon.OrbDropDown.TabIndex = 0;
             this.Ribbon.OrbImage = null;
-            this.Ribbon.OrbStyle = System.Windows.Forms.RibbonOrbStyle.Office_2010;
             this.Ribbon.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
-            this.Ribbon.Size = new System.Drawing.Size(967, 128);
+            this.Ribbon.Size = new System.Drawing.Size(967, 118);
             this.Ribbon.TabIndex = 0;
             this.Ribbon.Tabs.Add(this.rTHome);
             this.Ribbon.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
@@ -167,16 +169,10 @@
             // 
             // rPToolsHelp
             // 
-            this.rPToolsHelp.Items.Add(this.rBShapes);
             this.rPToolsHelp.Items.Add(this.rBBrushes);
             this.rPToolsHelp.Items.Add(this.rBColor);
+            this.rPToolsHelp.Items.Add(this.rCBShapes);
             this.rPToolsHelp.Text = "Tools help";
-            // 
-            // rBShapes
-            // 
-            this.rBShapes.Image = ((System.Drawing.Image)(resources.GetObject("rBShapes.Image")));
-            this.rBShapes.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBShapes.SmallImage")));
-            this.rBShapes.Text = "";
             // 
             // rBBrushes
             // 
@@ -208,6 +204,34 @@
             this.rBMinus.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBMinus.SmallImage")));
             this.rBMinus.Text = "";
             // 
+            // rCBShapes
+            // 
+            this.rCBShapes.DropDownItems.Add(this.rBLine);
+            this.rCBShapes.DropDownItems.Add(this.rBCircle);
+            this.rCBShapes.DropDownItems.Add(this.rBRectangle);
+            this.rCBShapes.Text = "Shapes";
+            this.rCBShapes.TextBoxText = "";
+            this.rCBShapes.Value = "";
+            this.rCBShapes.TextBoxTextChanged += new System.EventHandler(this.rCBShapes_TextBoxTextChanged);
+            // 
+            // rBLine
+            // 
+            this.rBLine.Image = ((System.Drawing.Image)(resources.GetObject("rBLine.Image")));
+            this.rBLine.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBLine.SmallImage")));
+            this.rBLine.Text = "Line";
+            // 
+            // rBCircle
+            // 
+            this.rBCircle.Image = ((System.Drawing.Image)(resources.GetObject("rBCircle.Image")));
+            this.rBCircle.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBCircle.SmallImage")));
+            this.rBCircle.Text = "Circle";
+            // 
+            // rBRectangle
+            // 
+            this.rBRectangle.Image = ((System.Drawing.Image)(resources.GetObject("rBRectangle.Image")));
+            this.rBRectangle.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBRectangle.SmallImage")));
+            this.rBRectangle.Text = "Rectangle";
+            // 
             // fMyPaint
             // 
             this.ClientSize = new System.Drawing.Size(967, 613);
@@ -215,6 +239,7 @@
             this.IsMdiContainer = true;
             this.Name = "fMyPaint";
             this.Text = "MyPaint";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.fMyPaint_Paint);
             this.ResumeLayout(false);
 
         }
@@ -237,11 +262,14 @@
         private System.Windows.Forms.RibbonButton rBText;
         private System.Windows.Forms.RibbonButton rBEraser;
         private System.Windows.Forms.RibbonButton rBEyeDropper;
-        private System.Windows.Forms.RibbonButton rBShapes;
         private System.Windows.Forms.RibbonButton rBBrushes;
         private System.Windows.Forms.RibbonButton rBColor;
         private System.Windows.Forms.RibbonButton rBPlus;
         private System.Windows.Forms.RibbonButton rBMinus;
+        private System.Windows.Forms.RibbonComboBox rCBShapes;
+        private System.Windows.Forms.RibbonButton rBLine;
+        private System.Windows.Forms.RibbonButton rBCircle;
+        private System.Windows.Forms.RibbonButton rBRectangle;
     }
 }
 

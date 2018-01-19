@@ -21,43 +21,89 @@ namespace MyPaint
             InitializeComponent();
         }
 
+        private void DrawLine(PictureBox box, Color col, int toolsSize)
+        {
+            using (Graphics g = Graphics.FromImage(box.Image))
+            {
+                Pen pen = new Pen(col, toolsSize);
+
+                g.DrawLine(pen, start, finish);
+                pBTempPic.Invalidate();
+            }
+        }
+
+        private void DrawRectangle(PictureBox box, Color col, int toolsSize)
+        {
+            using (Graphics g = Graphics.FromImage(box.Image))
+            {
+                Pen pen = new Pen(col, toolsSize);
+                int weight = finish.X - start.X, height = finish.Y - start.Y, x = start.X, y = start.Y;
+
+
+                if (finish.X < start.X)
+                    g.DrawRectangle(pen, start.X, start.Y, start.X - finish.X, start.Y - finish.Y);
+                else
+                    g.DrawRectangle(pen, start.X, start.Y, finish.X - start.X, finish.Y - start.Y);
+
+                pBTempPic.Invalidate();
+            }
+        }
+
         private void pBPic_MouseDown(object sender, MouseEventArgs e)
         {
             start.X = e.X;
             start.Y = e.Y;
 
-            if (e.Button == MouseButtons.Middle)
+            if (pBPic.Image == null)
+                pBPic.Image = new Bitmap(pBPic.Width, pBPic.Height);
+
+            pBTempPic.Image = pBPic.Image.Clone() as Bitmap;
+
+            pBTempPic.Visible = true;
+        }
+
+        private void pBPic_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
             {
-                Color c = (pBPic.Image as Bitmap).GetPixel(e.X, e.Y);
-                MessageBox.Show(c.Name);
+                finish.X = e.X;
+                finish.Y = e.Y;
+
+                pBTempPic.Image = pBPic.Image.Clone() as Bitmap;
+
+                if (pBTempPic.Image == null)
+                    pBTempPic.Image = new Bitmap(pBTempPic.Width, pBTempPic.Height);
+
+                switch (Functions.getInstance().ToolsName)
+                {
+                    case "Line":
+                        DrawLine(pBTempPic, Color.Black, 3);
+                        break;
+                    case "Pen":
+                        DrawLine(pBPic, Color.Black, 2);
+                        start = finish;
+                        break;
+                    case "Rectangle":
+                        DrawRectangle(pBTempPic, Color.Black, 3);
+                        break;
+                }
             }
         }
 
         private void pBPic_MouseUp(object sender, MouseEventArgs e)
         {
-            finish.X = e.X;
-            finish.Y = e.Y;
-
-            if (pBPic.Image == null)
+            switch (Functions.getInstance().ToolsName)
             {
-                pBPic.Image = new Bitmap(500, 500);
-                Pen pen = new Pen(Color.Azure);
-                using (Graphics g = Graphics.FromImage(pBPic.Image))
-                {
-                    //g.DrawLine(pen, finish.X, finish.Y);
-                }
+                case "Pen":
+                case "Line":
+                    DrawLine(pBPic, Color.Black, 3);
+                    break;
+                case "Rectangle":
+                    DrawRectangle(pBPic, Color.Black, 3);
+                    break;
             }
 
-            using (Graphics g = Graphics.FromImage(pBPic.Image))
-            {
-                Pen pen = new Pen(Color.Azure, 2);
-                Brush brush = new SolidBrush(current);
-                //g.DrawLine(pen, start, finish);
-                g.DrawLine(pen, start.X, start.Y, Math.Abs(finish.X - start.X), Math.Abs(finish.Y - start.Y));
-                //g.FillRectangle(brush, start.X, start.Y, Math.Abs(finish.X - start.X), Math.Abs(finish.Y - start.Y));
-
-                pBPic.Invalidate();
-            }
+            pBTempPic.Visible = false;
         }
     }
 }

@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.pBPic = new System.Windows.Forms.PictureBox();
+            this.pBTempPic = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pBPic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBTempPic)).BeginInit();
             this.SuspendLayout();
             // 
             // pBPic
@@ -41,17 +43,30 @@
             this.pBPic.TabIndex = 0;
             this.pBPic.TabStop = false;
             this.pBPic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pBPic_MouseDown);
+            this.pBPic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pBPic_MouseMove);
             this.pBPic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pBPic_MouseUp);
+            // 
+            // pBTempPic
+            // 
+            this.pBTempPic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBTempPic.Enabled = false;
+            this.pBTempPic.Location = new System.Drawing.Point(0, 0);
+            this.pBTempPic.Name = "pBTempPic";
+            this.pBTempPic.Size = new System.Drawing.Size(284, 261);
+            this.pBTempPic.TabIndex = 1;
+            this.pBTempPic.TabStop = false;
             // 
             // ImageWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.pBTempPic);
             this.Controls.Add(this.pBPic);
             this.Name = "ImageWindow";
             this.Text = "ImageWindow";
             ((System.ComponentModel.ISupportInitialize)(this.pBPic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBTempPic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -59,5 +74,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pBPic;
+        private System.Windows.Forms.PictureBox pBTempPic;
     }
 }
