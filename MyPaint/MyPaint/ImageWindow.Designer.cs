@@ -36,6 +36,7 @@
             // 
             // pBPic
             // 
+            this.pBPic.BackColor = System.Drawing.Color.White;
             this.pBPic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBPic.Location = new System.Drawing.Point(0, 0);
             this.pBPic.Name = "pBPic";
@@ -48,6 +49,7 @@
             // 
             // pBTempPic
             // 
+            this.pBTempPic.BackColor = System.Drawing.Color.White;
             this.pBTempPic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBTempPic.Enabled = false;
             this.pBTempPic.Location = new System.Drawing.Point(0, 0);

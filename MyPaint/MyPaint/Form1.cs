@@ -26,18 +26,33 @@ namespace MyPaint
 
         private void rBPen_Click(object sender, EventArgs e)
         {
-            //Cursor.Current = new Cursor(@"icon\pen-outlined-tool-in-angle.cur");
+            //string path = Application.ExecutablePath;
+            //path = path.Remove(path.Length - 12);
+            //Cursor.Current = new Cursor(path + @"\Icon\pencil-pointing-up.cur");
+            //Cursor myCursor = new Cursor(@"Icon\cursor.png");
+            //Cursor.Current = Cursors.UpArrow;
+            Cursor.Current = new Cursor(GetType(), @"Icon\cursor.cur");
             Functions.getInstance().ToolsName = "Pen";
         }
 
-        private void fMyPaint_Paint(object sender, PaintEventArgs e)
+        private void rBFill_Click(object sender, EventArgs e)
         {
-
+            Functions.getInstance().ToolsName = "Fill";
         }
 
-        private void rBShapes_Click(object sender, EventArgs e)
+        private void rBText_Click(object sender, EventArgs e)
         {
+            Functions.getInstance().ToolsName = "Text";
+        }
 
+        private void rBEraser_Click(object sender, EventArgs e)
+        {
+            Functions.getInstance().ToolsName = "Eraser";
+        }
+
+        private void rBEyeDropper_Click(object sender, EventArgs e)
+        {
+            Functions.getInstance().ToolsName = "Eye Dropper";
         }
 
         private void rCBShapes_TextBoxTextChanged(object sender, EventArgs e)
