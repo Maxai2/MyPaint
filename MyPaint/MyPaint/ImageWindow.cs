@@ -73,82 +73,85 @@ namespace MyPaint
         //--------------------------------------------------------------
         private void Fill(PictureBox box, Color col, Point pt)
         {
-            Bitmap bmp = box.Image.Clone() as Bitmap;
-            Color targetColor = bmp.GetPixel(pt.X, pt.Y);
-            if (targetColor.ToArgb().Equals(col.ToArgb()))
-            {
-                return;
-            }
-
-            Stack<Point> pixels = new Stack<Point>();
-
-            pixels.Push(pt);
-            while (pixels.Count != 0)
-            {
-                Point temp = pixels.Pop();
-                int y1 = temp.Y;
-                while (y1 >= 0 && bmp.GetPixel(temp.X, y1) == targetColor)
-                {
-                    y1--;
-                }
-                y1++;
-                bool spanLeft = false;
-                bool spanRight = false;
-                while (y1 < bmp.Height && bmp.GetPixel(temp.X, y1) == targetColor)
-                {
-                    bmp.SetPixel(temp.X, y1, col);
-
-                    if (!spanLeft && temp.X > 0 && bmp.GetPixel(temp.X - 1, y1) == targetColor)
-                    {
-                        pixels.Push(new Point(temp.X - 1, y1));
-                        spanLeft = true;
-                    }
-                    else if (spanLeft && temp.X - 1 == 0 && bmp.GetPixel(temp.X - 1, y1) != targetColor)
-                    {
-                        spanLeft = false;
-                    }
-                    if (!spanRight && temp.X < bmp.Width - 1 && bmp.GetPixel(temp.X + 1, y1) == targetColor)
-                    {
-                        pixels.Push(new Point(temp.X + 1, y1));
-                        spanRight = true;
-                    }
-                    else if (spanRight && temp.X < bmp.Width - 1 && bmp.GetPixel(temp.X + 1, y1) != targetColor)
-                    {
-                        spanRight = false;
-                    }
-                    y1++;
-                }
-
-            }
-
-            box.Refresh();
+            //Bitmap bmp = box.Image.Clone() as Bitmap;
+            //Color targetColor = bmp.GetPixel(pt.X, pt.Y);
+            //if (targetColor.ToArgb().Equals(col.ToArgb()))
+            //{
+            //    return;
+            //}
 
             //Stack<Point> pixels = new Stack<Point>();
-            //Bitmap bmp = box.Image.Clone() as Bitmap;
-            //Color targetColor = Color.White;
+
             //pixels.Push(pt);
-
-            //while (pixels.Count > 0)
+            //while (pixels.Count != 0)
             //{
-            //    Point a = pixels.Pop();
-
-            //    if (0 < a.X && a.X < bmp.Width && 0 < a.Y && a.Y < bmp.Height)
+            //    Point temp = pixels.Pop();
+            //    int y1 = temp.Y;
+            //    while (y1 >= 0 && bmp.GetPixel(temp.X, y1) == targetColor)
             //    {
-            //        if (bmp.GetPixel(a.X, a.Y) == targetColor)
+            //        y1--;
+            //    }
+            //    y1++;
+            //    bool spanLeft = false;
+            //    bool spanRight = false;
+            //    while (y1 < bmp.Height && bmp.GetPixel(temp.X, y1) == targetColor)
+            //    {
+            //        bmp.SetPixel(temp.X, y1, col);
+
+            //        if (!spanLeft && temp.X > 0 && bmp.GetPixel(temp.X - 1, y1) == targetColor)
             //        {
-            //            pixels.Push(new Point(a.X - 1, a.Y));
-            //            bmp.SetPixel(a.X, a.Y, col);
-            //            pixels.Push(new Point(a.X + 1, a.Y));
-            //            bmp.SetPixel(a.X, a.Y, col);
-            //            pixels.Push(new Point(a.X, a.Y - 1));
-            //            bmp.SetPixel(a.X, a.Y, col);
-            //            pixels.Push(new Point(a.X, a.Y + 1));
-            //            bmp.SetPixel(a.X, a.Y, col);
+            //            pixels.Push(new Point(temp.X - 1, y1));
+            //            spanLeft = true;
             //        }
+            //        else if (spanLeft && temp.X - 1 == 0 && bmp.GetPixel(temp.X - 1, y1) != targetColor)
+            //        {
+            //            spanLeft = false;
+            //        }
+            //        if (!spanRight && temp.X < bmp.Width - 1 && bmp.GetPixel(temp.X + 1, y1) == targetColor)
+            //        {
+            //            pixels.Push(new Point(temp.X + 1, y1));
+            //            spanRight = true;
+            //        }
+            //        else if (spanRight && temp.X < bmp.Width - 1 && bmp.GetPixel(temp.X + 1, y1) != targetColor)
+            //        {
+            //            spanRight = false;
+            //        }
+            //        y1++;
             //    }
 
-            //    //box.Refresh();
-            //    box.Invalidate();
+            //}
+
+            //box.Refresh();
+
+            Stack<Point> pixels = new Stack<Point>();
+            Bitmap bmp = box.Image.Clone() as Bitmap;
+            Color targetColor = Color.White;
+            pixels.Push(pt);
+
+            while (pixels.Count > 0)
+            {
+                Point a = pixels.Pop();
+
+                if (0 < a.X && a.X < bmp.Width && 0 < a.Y && a.Y < bmp.Height)
+                {
+                    if (bmp.GetPixel(a.X, a.Y) == targetColor)
+                    {
+                        pixels.Push(new Point(a.X - 1, a.Y));
+                        bmp.SetPixel(a.X, a.Y, col);
+                        pixels.Push(new Point(a.X + 1, a.Y));
+                        bmp.SetPixel(a.X, a.Y, col);
+                        pixels.Push(new Point(a.X, a.Y - 1));
+                        bmp.SetPixel(a.X, a.Y, col);
+                        pixels.Push(new Point(a.X, a.Y + 1));
+                        bmp.SetPixel(a.X, a.Y, col);
+                    }
+                }
+
+            }
+            box.Image = bmp;
+
+            //box.Refresh();
+            box.Invalidate();
             //}
         }
         //--------------------------------------------------------------
@@ -161,8 +164,8 @@ namespace MyPaint
                 textBox.Location = p;
                 textBox.Visible = true;
 
-                var key = KeyPressEventArgs;
-                while ()
+                //var key = KeyPressEventArgs;
+                //while ()
                 {
 
                 }
