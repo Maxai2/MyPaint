@@ -30,6 +30,7 @@
         {
             this.pBPic = new System.Windows.Forms.PictureBox();
             this.pBTempPic = new System.Windows.Forms.PictureBox();
+            this.textBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pBPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBTempPic)).BeginInit();
             this.SuspendLayout();
@@ -58,11 +59,21 @@
             this.pBTempPic.TabIndex = 1;
             this.pBTempPic.TabStop = false;
             // 
+            // textBox
+            // 
+            this.textBox.Location = new System.Drawing.Point(13, 22);
+            this.textBox.Multiline = true;
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(100, 20);
+            this.textBox.TabIndex = 2;
+            this.textBox.Visible = false;
+            // 
             // ImageWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.pBTempPic);
             this.Controls.Add(this.pBPic);
             this.Name = "ImageWindow";
@@ -70,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBTempPic)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -77,5 +89,6 @@
 
         private System.Windows.Forms.PictureBox pBPic;
         private System.Windows.Forms.PictureBox pBTempPic;
+        private System.Windows.Forms.TextBox textBox;
     }
 }

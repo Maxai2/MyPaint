@@ -23,6 +23,8 @@ namespace MyPaint
 
         public string ToolsName { get; set; }
 
-        public Color EyDropColor { get; set; }
+        public Color ColorForPanel { get; set; }
+
+        public int ToolsSize { get; set; }
     }
 }

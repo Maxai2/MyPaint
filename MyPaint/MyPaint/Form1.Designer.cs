@@ -48,12 +48,15 @@
             this.rBColor = new System.Windows.Forms.RibbonButton();
             this.rCBShapes = new System.Windows.Forms.RibbonComboBox();
             this.rBLine = new System.Windows.Forms.RibbonButton();
-            this.rBCircle = new System.Windows.Forms.RibbonButton();
             this.rBRectangle = new System.Windows.Forms.RibbonButton();
+            this.rBCircle = new System.Windows.Forms.RibbonButton();
             this.rPZoom = new System.Windows.Forms.RibbonPanel();
             this.rBPlus = new System.Windows.Forms.RibbonButton();
             this.rBMinus = new System.Windows.Forms.RibbonButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pColor = new System.Windows.Forms.Panel();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.trackBar = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // Ribbon
@@ -190,6 +193,7 @@
             this.rBColor.Image = ((System.Drawing.Image)(resources.GetObject("rBColor.Image")));
             this.rBColor.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBColor.SmallImage")));
             this.rBColor.Text = "";
+            this.rBColor.Click += new System.EventHandler(this.rBColor_Click);
             // 
             // rCBShapes
             // 
@@ -203,18 +207,21 @@
             // 
             // rBLine
             // 
+            this.rBLine.Image = ((System.Drawing.Image)(resources.GetObject("rBLine.Image")));
             this.rBLine.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBLine.SmallImage")));
             this.rBLine.Text = "Line";
             // 
-            // rBCircle
-            // 
-            this.rBCircle.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBCircle.SmallImage")));
-            this.rBCircle.Text = "Circle";
-            // 
             // rBRectangle
             // 
+            this.rBRectangle.Image = ((System.Drawing.Image)(resources.GetObject("rBRectangle.Image")));
             this.rBRectangle.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBRectangle.SmallImage")));
             this.rBRectangle.Text = "Rectangle";
+            // 
+            // rBCircle
+            // 
+            this.rBCircle.Image = ((System.Drawing.Image)(resources.GetObject("rBCircle.Image")));
+            this.rBCircle.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBCircle.SmallImage")));
+            this.rBCircle.Text = "Circle";
             // 
             // rPZoom
             // 
@@ -234,22 +241,35 @@
             this.rBMinus.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBMinus.SmallImage")));
             this.rBMinus.Text = "";
             // 
-            // panel1
+            // pColor
             // 
-            this.panel1.Location = new System.Drawing.Point(625, 60);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(20, 21);
-            this.panel1.TabIndex = 2;
+            this.pColor.Location = new System.Drawing.Point(645, 60);
+            this.pColor.Name = "pColor";
+            this.pColor.Size = new System.Drawing.Size(49, 45);
+            this.pColor.TabIndex = 2;
+            // 
+            // trackBar
+            // 
+            this.trackBar.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.trackBar.Location = new System.Drawing.Point(515, 60);
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(104, 45);
+            this.trackBar.TabIndex = 10;
+            this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
+            this.trackBar.Move += new System.EventHandler(this.trackBar_Move);
             // 
             // fMyPaint
             // 
             this.ClientSize = new System.Drawing.Size(967, 613);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.trackBar);
+            this.Controls.Add(this.pColor);
             this.Controls.Add(this.Ribbon);
             this.IsMdiContainer = true;
             this.Name = "fMyPaint";
             this.Text = "MyPaint";
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -279,7 +299,9 @@
         private System.Windows.Forms.RibbonButton rBLine;
         private System.Windows.Forms.RibbonButton rBCircle;
         private System.Windows.Forms.RibbonButton rBRectangle;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pColor;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.TrackBar trackBar;
     }
 }
 

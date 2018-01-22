@@ -14,7 +14,8 @@ namespace MyPaint
     {
         Point start;
         Point finish;
-        Color current;
+        Color current = Color.Black;
+        int toolsSize = 1;
         //--------------------------------------------------------------
         public ImageWindow()
         {
@@ -72,31 +73,83 @@ namespace MyPaint
         //--------------------------------------------------------------
         private void Fill(PictureBox box, Color col, Point pt)
         {
-            Stack<Point> pixels = new Stack<Point>();
             Bitmap bmp = box.Image.Clone() as Bitmap;
-            Color targetColor = Color.White;
-            pixels.Push(pt);
-
-            while (pixels.Count > 0)
+            Color targetColor = bmp.GetPixel(pt.X, pt.Y);
+            if (targetColor.ToArgb().Equals(col.ToArgb()))
             {
-                Point a = pixels.Pop();
-                
-                if (0 < a.X && a.X < bmp.Width && 0 < a.Y && a.Y < bmp.Height)
+                return;
+            }
+
+            Stack<Point> pixels = new Stack<Point>();
+
+            pixels.Push(pt);
+            while (pixels.Count != 0)
+            {
+                Point temp = pixels.Pop();
+                int y1 = temp.Y;
+                while (y1 >= 0 && bmp.GetPixel(temp.X, y1) == targetColor)
                 {
-                    if (bmp.GetPixel(a.X, a.Y) == targetColor)
-                    {
-                        bmp.SetPixel(a.X, a.Y, col);
-                        pixels.Push(new Point(a.X - 1, a.Y));
-                        pixels.Push(new Point(a.X + 1, a.Y));
-                        pixels.Push(new Point(a.X, a.Y - 1));
-                        pixels.Push(new Point(a.X, a.Y + 1));
-                    }
+                    y1--;
                 }
+                y1++;
+                bool spanLeft = false;
+                bool spanRight = false;
+                while (y1 < bmp.Height && bmp.GetPixel(temp.X, y1) == targetColor)
+                {
+                    bmp.SetPixel(temp.X, y1, col);
+
+                    if (!spanLeft && temp.X > 0 && bmp.GetPixel(temp.X - 1, y1) == targetColor)
+                    {
+                        pixels.Push(new Point(temp.X - 1, y1));
+                        spanLeft = true;
+                    }
+                    else if (spanLeft && temp.X - 1 == 0 && bmp.GetPixel(temp.X - 1, y1) != targetColor)
+                    {
+                        spanLeft = false;
+                    }
+                    if (!spanRight && temp.X < bmp.Width - 1 && bmp.GetPixel(temp.X + 1, y1) == targetColor)
+                    {
+                        pixels.Push(new Point(temp.X + 1, y1));
+                        spanRight = true;
+                    }
+                    else if (spanRight && temp.X < bmp.Width - 1 && bmp.GetPixel(temp.X + 1, y1) != targetColor)
+                    {
+                        spanRight = false;
+                    }
+                    y1++;
+                }
+
             }
 
             box.Refresh();
-            box.Invalidate();
 
+            //Stack<Point> pixels = new Stack<Point>();
+            //Bitmap bmp = box.Image.Clone() as Bitmap;
+            //Color targetColor = Color.White;
+            //pixels.Push(pt);
+
+            //while (pixels.Count > 0)
+            //{
+            //    Point a = pixels.Pop();
+
+            //    if (0 < a.X && a.X < bmp.Width && 0 < a.Y && a.Y < bmp.Height)
+            //    {
+            //        if (bmp.GetPixel(a.X, a.Y) == targetColor)
+            //        {
+            //            pixels.Push(new Point(a.X - 1, a.Y));
+            //            bmp.SetPixel(a.X, a.Y, col);
+            //            pixels.Push(new Point(a.X + 1, a.Y));
+            //            bmp.SetPixel(a.X, a.Y, col);
+            //            pixels.Push(new Point(a.X, a.Y - 1));
+            //            bmp.SetPixel(a.X, a.Y, col);
+            //            pixels.Push(new Point(a.X, a.Y + 1));
+            //            bmp.SetPixel(a.X, a.Y, col);
+            //        }
+            //    }
+
+            //    //box.Refresh();
+            //    box.Invalidate();
+            //}
         }
         //--------------------------------------------------------------
         private void PutText(PictureBox box, Point p)
@@ -105,24 +158,28 @@ namespace MyPaint
             {
                 Font font = new Font("Arial", 16);
 
+                textBox.Location = p;
+                textBox.Visible = true;
 
-                g.DrawString("Hello", font, Brushes.Black, p);
+                var key = KeyPressEventArgs;
+                while ()
+                {
+
+                }
+
+                textBox.Visible = false;
+                g.DrawString(textBox.Text, font, Brushes.Black, p);
 
                 box.Invalidate();
             }
         }
         //--------------------------------------------------------------
-        private void Eraser(PictureBox box, Point p)
+        private void Eraser(PictureBox box, Point p, int size)
         {
-            Bitmap bit = box.Image.Clone() as Bitmap;
-
-            for (int i = 0; i < 7; i++)
+            using (Graphics g = Graphics.FromImage(box.Image))
             {
-                for (int j = 0; j < 7; j++)
-                    bit.SetPixel(p.X + i, p.Y + j, Color.White);
+                g.FillRectangle(Brushes.White, p.X, p.Y, size, size);
             }
-
-            box.Image = bit.Clone() as Image;
 
             box.Invalidate();
         }
@@ -143,17 +200,20 @@ namespace MyPaint
             start.X = e.X;
             start.Y = e.Y;
 
+            current = Functions.getInstance().ColorForPanel;
+            toolsSize = Functions.getInstance().ToolsSize;
+
             if (pBPic.Image == null)
                 pBPic.Image = new Bitmap(pBPic.Width, pBPic.Height);
 
             if (Functions.getInstance().ToolsName == "Fill")
-                Fill(pBPic, Color.Coral, start);
+                Fill(pBPic, Color.Teal, start);
             else
             if (Functions.getInstance().ToolsName == "Text")
                 PutText(pBPic, start);
             else
             if (Functions.getInstance().ToolsName == "Eye Dropper")
-                Eyedropper(pBPic, start);
+                current = Functions.getInstance().ColorForPanel = Eyedropper(pBPic, start);
             else
             {
                 pBTempPic.Image = pBPic.Image.Clone() as Bitmap;
@@ -177,20 +237,21 @@ namespace MyPaint
                 switch (Functions.getInstance().ToolsName)
                 {
                     case "Line":
-                        DrawLine(pBTempPic, Color.Black, 3);
+                        DrawLine(pBTempPic, current, toolsSize);
                         break;
                     case "Pen":
-                        DrawLine(pBPic, Color.Black, 1);
+                        DrawLine(pBPic, current, 1);
                         start = finish;
                         break;
                     case "Rectangle":
-                        DrawRectangle(pBTempPic, Color.Black, 3);
+                        DrawRectangle(pBTempPic, current, toolsSize);
                         break;
                     case "Circle":
-                        DrawCircle(pBTempPic, Color.Black, 3);
+                        DrawCircle(pBTempPic, current, toolsSize);
                         break;
                     case "Eraser":
-                        Eraser(pBTempPic, start);
+                        start = finish;
+                        Eraser(pBTempPic, start, toolsSize);
                         break;
                 }
             }
@@ -202,16 +263,16 @@ namespace MyPaint
             {
                 case "Pen":
                 case "Line":
-                    DrawLine(pBPic, Color.Black, 3);
+                    DrawLine(pBPic, current, toolsSize);
                     break;
                 case "Rectangle":
-                    DrawRectangle(pBPic, Color.Black, 3);
+                    DrawRectangle(pBPic, current, toolsSize);
                     break;
                 case "Circle":
-                    DrawCircle(pBPic, Color.Black, 3);
+                    DrawCircle(pBPic, current, toolsSize);
                     break;
                 case "Eraser":
-                    Eraser(pBPic, start);
+                    Eraser(pBPic, start, toolsSize);
                     break;
             }
 

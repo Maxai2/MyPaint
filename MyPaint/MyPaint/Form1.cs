@@ -31,7 +31,8 @@ namespace MyPaint
             //Cursor.Current = new Cursor(path + @"\Icon\pencil-pointing-up.cur");
             //Cursor myCursor = new Cursor(@"Icon\cursor.png");
             //Cursor.Current = Cursors.UpArrow;
-            Cursor.Current = new Cursor(GetType(), @"Icon\cursor.cur");
+            //Cursor.Current = new Cursor(GetType(), @"Icon\cursor.cur");
+
             Functions.getInstance().ToolsName = "Pen";
         }
 
@@ -69,6 +70,24 @@ namespace MyPaint
                     Functions.getInstance().ToolsName = "Rectangle";
                     break;
             }
+        }
+
+        private void rBColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDlg = new ColorDialog();
+
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+                Functions.getInstance().ColorForPanel = pColor.BackColor = colorDlg.Color;
+        }
+
+        private void trackBar_Move(object sender, EventArgs e)
+        {
+        }
+
+        private void trackBar_ValueChanged(object sender, EventArgs e)
+        {
+
+            Functions.getInstance().ToolsSize = trackBar.Value;
         }
     }
 }
