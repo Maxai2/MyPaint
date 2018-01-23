@@ -14,12 +14,22 @@ namespace MyPaint
     {
         Point start;
         Point finish;
-        Color current = Color.Black;
-        int toolsSize = 1;
+        Color current;
+        int toolsSize;
         //--------------------------------------------------------------
         public ImageWindow()
         {
             InitializeComponent();
+
+            Functions.getInstance().ImageCreated = true;
+
+            if (Functions.getInstance().OpenFile)
+            {
+                if (pBPic.Image == null)
+                    pBPic.Image = new Bitmap(pBPic.Width, pBPic.Height);
+
+                pBPic.Image = Image.FromFile(Functions.getInstance().PicOpenPath);
+            }
         }
         //--------------------------------------------------------------
         private void DrawLine(PictureBox box, Color col, int toolsSize)
@@ -148,7 +158,7 @@ namespace MyPaint
                 }
 
             }
-            box.Image = bmp;
+            box.Image = bmp.Clone() as Image;
 
             //box.Refresh();
             box.Invalidate();
@@ -157,24 +167,9 @@ namespace MyPaint
         //--------------------------------------------------------------
         private void PutText(PictureBox box, Point p)
         {
-            using (Graphics g = Graphics.FromImage(box.Image))
-            {
-                Font font = new Font("Arial", 16);
-
-                textBox.Location = p;
-                textBox.Visible = true;
-
-                //var key = KeyPressEventArgs;
-                //while ()
-                {
-
-                }
-
-                textBox.Visible = false;
-                g.DrawString(textBox.Text, font, Brushes.Black, p);
-
-                box.Invalidate();
-            }
+            textBox.Location = p;
+            textBox.Text = "";
+            textBox.Visible = true; 
         }
         //--------------------------------------------------------------
         private void Eraser(PictureBox box, Point p, int size)
@@ -280,6 +275,33 @@ namespace MyPaint
             }
 
             pBTempPic.Visible = false;
+
+            Functions.getInstance().LastImage = pBPic.Image.Clone() as Bitmap;
+
+            if (true)
+                Functions.getInstance().AddImage(pBPic.Image);
+        }
+        //--------------------------------------------------------------
+        private void textBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (Graphics g = Graphics.FromImage(pBPic.Image))
+                {
+                    Font font = new Font("Arial", 16);
+                    textBox.Visible = false;
+
+                    SolidBrush brushes = new SolidBrush(current);
+                    g.DrawString(textBox.Text, font, brushes, textBox.Location);
+
+                    pBPic.Invalidate();
+                }
+            }
+            else
+            if (e.KeyCode == Keys.Escape)
+            {
+                textBox.Visible = false;
+            }
         }
     }
 }

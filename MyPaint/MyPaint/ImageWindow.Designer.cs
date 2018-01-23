@@ -67,6 +67,7 @@
             this.textBox.Size = new System.Drawing.Size(100, 20);
             this.textBox.TabIndex = 2;
             this.textBox.Visible = false;
+            this.textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // ImageWindow
             // 

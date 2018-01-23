@@ -30,10 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMyPaint));
             this.Ribbon = new System.Windows.Forms.Ribbon();
-            this.rOMINew = new System.Windows.Forms.RibbonOrbMenuItem();
             this.rOMIOpen = new System.Windows.Forms.RibbonOrbMenuItem();
             this.rOMISave = new System.Windows.Forms.RibbonOrbMenuItem();
-            this.rOMISaveAs = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
             this.rOMIAbout = new System.Windows.Forms.RibbonOrbMenuItem();
             this.rTHome = new System.Windows.Forms.RibbonTab();
@@ -56,6 +54,9 @@
             this.pColor = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.trackBar = new System.Windows.Forms.TrackBar();
+            this.tBoxToolSize = new System.Windows.Forms.TextBox();
+            this.rBBack = new System.Windows.Forms.RibbonButton();
+            this.rBForward = new System.Windows.Forms.RibbonButton();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,16 +71,19 @@
             // 
             this.Ribbon.OrbDropDown.BorderRoundness = 8;
             this.Ribbon.OrbDropDown.Location = new System.Drawing.Point(0, 0);
-            this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMINew);
             this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMIOpen);
             this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMISave);
-            this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMISaveAs);
             this.Ribbon.OrbDropDown.MenuItems.Add(this.ribbonSeparator1);
             this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMIAbout);
             this.Ribbon.OrbDropDown.Name = "";
             this.Ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 295);
             this.Ribbon.OrbDropDown.TabIndex = 0;
             this.Ribbon.OrbImage = null;
+            // 
+            // 
+            // 
+            this.Ribbon.QuickAcessToolbar.Items.Add(this.rBBack);
+            this.Ribbon.QuickAcessToolbar.Items.Add(this.rBForward);
             this.Ribbon.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
             this.Ribbon.Size = new System.Drawing.Size(967, 118);
             this.Ribbon.TabIndex = 0;
@@ -88,20 +92,13 @@
             this.Ribbon.Text = "Ribbon";
             this.Ribbon.ThemeColor = System.Windows.Forms.RibbonTheme.Blue;
             // 
-            // rOMINew
-            // 
-            this.rOMINew.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
-            this.rOMINew.Image = ((System.Drawing.Image)(resources.GetObject("rOMINew.Image")));
-            this.rOMINew.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMINew.SmallImage")));
-            this.rOMINew.Text = "New";
-            this.rOMINew.Click += new System.EventHandler(this.rOMINew_Click);
-            // 
             // rOMIOpen
             // 
             this.rOMIOpen.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
             this.rOMIOpen.Image = ((System.Drawing.Image)(resources.GetObject("rOMIOpen.Image")));
             this.rOMIOpen.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMIOpen.SmallImage")));
             this.rOMIOpen.Text = "Open";
+            this.rOMIOpen.Click += new System.EventHandler(this.rOMIOpen_Click);
             // 
             // rOMISave
             // 
@@ -109,13 +106,7 @@
             this.rOMISave.Image = ((System.Drawing.Image)(resources.GetObject("rOMISave.Image")));
             this.rOMISave.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMISave.SmallImage")));
             this.rOMISave.Text = "Save";
-            // 
-            // rOMISaveAs
-            // 
-            this.rOMISaveAs.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
-            this.rOMISaveAs.Image = ((System.Drawing.Image)(resources.GetObject("rOMISaveAs.Image")));
-            this.rOMISaveAs.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMISaveAs.SmallImage")));
-            this.rOMISaveAs.Text = "Save as";
+            this.rOMISave.Click += new System.EventHandler(this.rOMISave_Click);
             // 
             // rOMIAbout
             // 
@@ -243,7 +234,7 @@
             // 
             // pColor
             // 
-            this.pColor.Location = new System.Drawing.Point(645, 60);
+            this.pColor.Location = new System.Drawing.Point(652, 60);
             this.pColor.Name = "pColor";
             this.pColor.Size = new System.Drawing.Size(49, 45);
             this.pColor.TabIndex = 2;
@@ -255,12 +246,35 @@
             this.trackBar.Name = "trackBar";
             this.trackBar.Size = new System.Drawing.Size(104, 45);
             this.trackBar.TabIndex = 10;
+            this.trackBar.TabStop = false;
             this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
-            this.trackBar.Move += new System.EventHandler(this.trackBar_Move);
+            // 
+            // tBoxToolSize
+            // 
+            this.tBoxToolSize.Enabled = false;
+            this.tBoxToolSize.Location = new System.Drawing.Point(626, 60);
+            this.tBoxToolSize.Name = "tBoxToolSize";
+            this.tBoxToolSize.Size = new System.Drawing.Size(20, 20);
+            this.tBoxToolSize.TabIndex = 12;
+            // 
+            // rBBack
+            // 
+            this.rBBack.Image = ((System.Drawing.Image)(resources.GetObject("rBBack.Image")));
+            this.rBBack.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.rBBack.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBBack.SmallImage")));
+            this.rBBack.Text = "ribbonButton1";
+            // 
+            // rBForward
+            // 
+            this.rBForward.Image = ((System.Drawing.Image)(resources.GetObject("rBForward.Image")));
+            this.rBForward.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.rBForward.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBForward.SmallImage")));
+            this.rBForward.Text = "ribbonButton1";
             // 
             // fMyPaint
             // 
             this.ClientSize = new System.Drawing.Size(967, 613);
+            this.Controls.Add(this.tBoxToolSize);
             this.Controls.Add(this.trackBar);
             this.Controls.Add(this.pColor);
             this.Controls.Add(this.Ribbon);
@@ -302,6 +316,9 @@
         private System.Windows.Forms.Panel pColor;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.TrackBar trackBar;
+        private System.Windows.Forms.TextBox tBoxToolSize;
+        private System.Windows.Forms.RibbonButton rBBack;
+        private System.Windows.Forms.RibbonButton rBForward;
     }
 }
 
