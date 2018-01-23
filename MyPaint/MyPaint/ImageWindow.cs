@@ -10,12 +10,24 @@ using System.Windows.Forms;
 //--------------------------------------------------------------
 namespace MyPaint
 {
+    //class ChildForm : UserControl
+    //{
+    //    private fMyPaint _pForm;
+
+    //    public ChildForm(fMyPaint parentForm)
+    //    {
+    //        _pForm = parentForm;
+    //    }
+    //}
+
     public partial class ImageWindow : Form
     {
         Point start;
         Point finish;
         Color current;
         int toolsSize;
+        Font font;
+
         //--------------------------------------------------------------
         public ImageWindow()
         {
@@ -29,6 +41,8 @@ namespace MyPaint
                     pBPic.Image = new Bitmap(pBPic.Width, pBPic.Height);
 
                 pBPic.Image = Image.FromFile(Functions.getInstance().PicOpenPath);
+
+                pBPic.Invalidate();
             }
         }
         //--------------------------------------------------------------
@@ -146,12 +160,12 @@ namespace MyPaint
                 {
                     if (bmp.GetPixel(a.X, a.Y) == targetColor)
                     {
+                        //bmp.SetPixel(a.X, a.Y, col);
                         pixels.Push(new Point(a.X - 1, a.Y));
-                        bmp.SetPixel(a.X, a.Y, col);
                         pixels.Push(new Point(a.X + 1, a.Y));
-                        bmp.SetPixel(a.X, a.Y, col);
+                        //bmp.SetPixel(a.X, a.Y, col);
                         pixels.Push(new Point(a.X, a.Y - 1));
-                        bmp.SetPixel(a.X, a.Y, col);
+                        //bmp.SetPixel(a.X, a.Y, col);
                         pixels.Push(new Point(a.X, a.Y + 1));
                         bmp.SetPixel(a.X, a.Y, col);
                     }
@@ -176,7 +190,10 @@ namespace MyPaint
         {
             using (Graphics g = Graphics.FromImage(box.Image))
             {
-                g.FillRectangle(Brushes.White, p.X, p.Y, size, size);
+                int x = p.X - size / 2;
+                int y = p.Y - size / 2;
+
+                g.FillRectangle(Brushes.White, x, y, size, size);
             }
 
             box.Invalidate();
@@ -200,18 +217,36 @@ namespace MyPaint
 
             current = Functions.getInstance().ColorForPanel;
             toolsSize = Functions.getInstance().ToolsSize;
+            font = Functions.getInstance().FontName;
+
+            textBox.Font = font;
 
             if (pBPic.Image == null)
                 pBPic.Image = new Bitmap(pBPic.Width, pBPic.Height);
 
             if (Functions.getInstance().ToolsName == "Fill")
-                Fill(pBPic, Color.Teal, start);
+            {
+                Fill(pBPic, Color.Blue, start);
+
+                //pBTempPic.Image = pBPic.Image.Clone() as Bitmap;
+
+                //pBTempPic.Visible = true;
+            }
             else
             if (Functions.getInstance().ToolsName == "Text")
                 PutText(pBPic, start);
             else
             if (Functions.getInstance().ToolsName == "Eye Dropper")
+            {
                 current = Functions.getInstance().ColorForPanel = Eyedropper(pBPic, start);
+
+                (MdiParent as fMyPaint).ChangeCol(current);
+            }
+            else
+            if (Functions.getInstance().ToolsName == "Eraser")
+            {
+
+            }
             else
             {
                 pBTempPic.Image = pBPic.Image.Clone() as Bitmap;
@@ -249,7 +284,7 @@ namespace MyPaint
                         break;
                     case "Eraser":
                         start = finish;
-                        Eraser(pBTempPic, start, toolsSize);
+                        Eraser(pBPic, start, toolsSize);
                         break;
                 }
             }
@@ -288,7 +323,7 @@ namespace MyPaint
             {
                 using (Graphics g = Graphics.FromImage(pBPic.Image))
                 {
-                    Font font = new Font("Arial", 16);
+                    //Font font = new Font("Arial", 16);
                     textBox.Visible = false;
 
                     SolidBrush brushes = new SolidBrush(current);

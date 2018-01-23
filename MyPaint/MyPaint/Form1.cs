@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MyPaint
-{
+{ 
     public partial class fMyPaint : Form
     {
+
         public fMyPaint()
         {
             InitializeComponent();
@@ -22,13 +23,6 @@ namespace MyPaint
             Functions.getInstance().ToolsName = "Pen";
             Functions.getInstance().ImageCreated = false;
             Functions.getInstance().OpenFile = false;
-        }
-
-        private void rOMINew_Click(object sender, EventArgs e)
-        {
-            ImageWindow iw = new ImageWindow();
-            iw.MdiParent = this;
-            iw.Show();
         }
 
         private void rBPen_Click(object sender, EventArgs e)
@@ -51,6 +45,12 @@ namespace MyPaint
         private void rBText_Click(object sender, EventArgs e)
         {
             Functions.getInstance().ToolsName = "Text";
+
+            using (FontDialog font = new FontDialog())
+            {
+                if (font.ShowDialog() == DialogResult.OK)
+                    Functions.getInstance().FontName = font.Font;
+            }
         }
 
         private void rBEraser_Click(object sender, EventArgs e)
@@ -150,5 +150,14 @@ namespace MyPaint
                 }
             }
         }
+
+        private void ribbonOrbMenuI_Click(object sender, EventArgs e)
+        {
+            ImageWindow iw = new ImageWindow();
+            iw.MdiParent = this;
+            iw.Show();
+        }
+
+        public void ChangeCol(Color col) => pColor.BackColor = col;
     }
 }

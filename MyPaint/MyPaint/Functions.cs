@@ -27,6 +27,8 @@ namespace MyPaint
 
         public int ListCount() => ImageList.Count;
 
+        public Font FontName { get; set; }
+
         public string ToolsName { get; set; }
 
         public Color ColorForPanel { get; set; }

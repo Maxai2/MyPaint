@@ -34,6 +34,8 @@
             this.rOMISave = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
             this.rOMIAbout = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.rBBack = new System.Windows.Forms.RibbonButton();
+            this.rBForward = new System.Windows.Forms.RibbonButton();
             this.rTHome = new System.Windows.Forms.RibbonTab();
             this.rPTools = new System.Windows.Forms.RibbonPanel();
             this.rBPen = new System.Windows.Forms.RibbonButton();
@@ -55,8 +57,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.tBoxToolSize = new System.Windows.Forms.TextBox();
-            this.rBBack = new System.Windows.Forms.RibbonButton();
-            this.rBForward = new System.Windows.Forms.RibbonButton();
+            this.ribbonOrbMenuI = new System.Windows.Forms.RibbonOrbMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,8 +76,9 @@
             this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMISave);
             this.Ribbon.OrbDropDown.MenuItems.Add(this.ribbonSeparator1);
             this.Ribbon.OrbDropDown.MenuItems.Add(this.rOMIAbout);
+            this.Ribbon.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuI);
             this.Ribbon.OrbDropDown.Name = "";
-            this.Ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 295);
+            this.Ribbon.OrbDropDown.Size = new System.Drawing.Size(527, 251);
             this.Ribbon.OrbDropDown.TabIndex = 0;
             this.Ribbon.OrbImage = null;
             // 
@@ -114,6 +116,20 @@
             this.rOMIAbout.Image = ((System.Drawing.Image)(resources.GetObject("rOMIAbout.Image")));
             this.rOMIAbout.SmallImage = ((System.Drawing.Image)(resources.GetObject("rOMIAbout.SmallImage")));
             this.rOMIAbout.Text = "About";
+            // 
+            // rBBack
+            // 
+            this.rBBack.Image = ((System.Drawing.Image)(resources.GetObject("rBBack.Image")));
+            this.rBBack.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.rBBack.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBBack.SmallImage")));
+            this.rBBack.Text = "ribbonButton1";
+            // 
+            // rBForward
+            // 
+            this.rBForward.Image = ((System.Drawing.Image)(resources.GetObject("rBForward.Image")));
+            this.rBForward.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.rBForward.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBForward.SmallImage")));
+            this.rBForward.Text = "ribbonButton1";
             // 
             // rTHome
             // 
@@ -234,7 +250,7 @@
             // 
             // pColor
             // 
-            this.pColor.Location = new System.Drawing.Point(652, 60);
+            this.pColor.Location = new System.Drawing.Point(651, 60);
             this.pColor.Name = "pColor";
             this.pColor.Size = new System.Drawing.Size(49, 45);
             this.pColor.TabIndex = 2;
@@ -257,19 +273,13 @@
             this.tBoxToolSize.Size = new System.Drawing.Size(20, 20);
             this.tBoxToolSize.TabIndex = 12;
             // 
-            // rBBack
+            // ribbonOrbMenuI
             // 
-            this.rBBack.Image = ((System.Drawing.Image)(resources.GetObject("rBBack.Image")));
-            this.rBBack.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
-            this.rBBack.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBBack.SmallImage")));
-            this.rBBack.Text = "ribbonButton1";
-            // 
-            // rBForward
-            // 
-            this.rBForward.Image = ((System.Drawing.Image)(resources.GetObject("rBForward.Image")));
-            this.rBForward.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
-            this.rBForward.SmallImage = ((System.Drawing.Image)(resources.GetObject("rBForward.SmallImage")));
-            this.rBForward.Text = "ribbonButton1";
+            this.ribbonOrbMenuI.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.ribbonOrbMenuI.Image = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuI.Image")));
+            this.ribbonOrbMenuI.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuI.SmallImage")));
+            this.ribbonOrbMenuI.Text = "New";
+            this.ribbonOrbMenuI.Click += new System.EventHandler(this.ribbonOrbMenuI_Click);
             // 
             // fMyPaint
             // 
@@ -319,6 +329,7 @@
         private System.Windows.Forms.TextBox tBoxToolSize;
         private System.Windows.Forms.RibbonButton rBBack;
         private System.Windows.Forms.RibbonButton rBForward;
+        private System.Windows.Forms.RibbonOrbMenuItem ribbonOrbMenuI;
     }
 }
 
